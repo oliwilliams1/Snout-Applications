@@ -1,10 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use tauri::{Manager, Window};
-use device_query::{DeviceQuery, DeviceState};
+use tauri::{Manager, WebviewWindow};
+use device_query::{DeviceQuery, DeviceState, Keycode};
+use std::thread;
+use std::time::Duration;
 
-#[tauri::command]
-fn set_window_position(window: Window) {
+fn set_window_position(window: &WebviewWindow) {
     let size = window.inner_size().unwrap();
     let half_width: i32 = (size.width / 2).try_into().unwrap();
 
@@ -16,8 +17,7 @@ fn set_window_position(window: Window) {
     ))).unwrap();
 }
 
-#[tauri::command]
-fn close_window(window: Window) {
+fn close_window(window: &WebviewWindow) {
     window.close().unwrap();
 }
 
@@ -26,7 +26,24 @@ fn main() {
         .setup(|app| {
             let main_window = app.get_webview_window("main").unwrap();
             main_window.set_title("Snout Apps")?;
-            main_window.eval("window.location.href = 'https://www.google.com';")?;
+            main_window.eval("window.location.href = 'https://oliwilliams1.github.io/Snout-Apps-Website/';")?;
+
+            let main_window_clone = main_window.clone();
+            thread::spawn(move || {
+                let device_state = DeviceState::new();
+                loop {
+                    let keys = device_state.get_keys();
+                    if keys.contains(&Keycode::LControl) && keys.contains(&Keycode::LShift) {
+                        if keys.contains(&Keycode::D) {
+                            set_window_position(&main_window_clone);
+                        } else if keys.contains(&Keycode::A) || keys.contains(&Keycode::W) {
+                            close_window(&main_window_clone);
+                        }
+                    }
+                    thread::sleep(Duration::from_millis(16)); // Smooth enough for 60 fps, Slow enough for minimal cpu usage
+                }
+            });
+
             Ok(())
         })
         .run(tauri::generate_context!())
