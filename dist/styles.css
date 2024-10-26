@@ -18,8 +18,8 @@ body {
 .innerWheel {
     position: absolute;
     background-color: rgba(25, 29, 32, 0.9);
-    width: 55vw;
-    height: 55vw;
+    width: 60vw;
+    height: 60vw;
     border-radius: 100%;
     top: 50%;
     left: 50%;
@@ -30,10 +30,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: aqua;
     clip-path: polygon(100% 0%, 50% 0%,50.0% 20.0%, 53.91578555107117% 20.25665283203125%, 57.76457214355469% 21.0222225189209%, 61.48050498962402% 22.283611297607422%, 65.0% 24.019237518310547%, 68.26284217834473% 26.199399948120117%, 71.21320533752441% 28.786794662475586%);
-    border-color: black;
-    border-width: 10px;
 }
 
 .segment:hover {
