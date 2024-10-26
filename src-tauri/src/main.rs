@@ -21,6 +21,11 @@ fn close_window(window: &WebviewWindow) {
     window.close().unwrap();
 }
 
+#[tauri::command]
+fn change_window_size(window: tauri::Window) {
+    window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(650.0, 800.0))).unwrap();
+}
+
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
@@ -46,6 +51,7 @@ fn main() {
 
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![change_window_size])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

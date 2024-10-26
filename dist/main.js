@@ -1,3 +1,5 @@
+import { invoke } from '@tauri-apps/api/tauri'
+
 const locations = [
   { 0: "https://oliwilliams1.github.io/Snout-Apps-Website/src/todo/" }, 
   { 1: "https://oliwilliams1.github.io/Snout-Apps-Website/src/chatbot/" }, 
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     segment.addEventListener('click', () => {
       window.location.href = locations[i][i];
+      invoke('change_window_size');
     });
   }
 });
