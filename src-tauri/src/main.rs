@@ -26,7 +26,7 @@ fn main() {
         .setup(|app| {
             let main_window = app.get_webview_window("main").unwrap();
             main_window.set_title("Snout Apps")?;
-            main_window.eval("window.location.href = 'https://oliwilliams1.github.io/Snout-Apps-Website/';")?;
+            //main_window.eval("window.location.href = 'https://oliwilliams1.github.io/Snout-Apps-Website/';")?;
 
             let main_window_clone = main_window.clone();
             thread::spawn(move || {
@@ -40,7 +40,7 @@ fn main() {
                             close_window(&main_window_clone);
                         }
                     }
-                    thread::sleep(Duration::from_millis(16)); // Smooth enough for 60 fps, Slow enough for minimal cpu usage
+                    thread::sleep(Duration::from_millis(50));
                 }
             });
 

@@ -4,14 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build:css-release": "tailwindcss -i ./src/styles.css -o ./src/output.css",
-    "build:vite-release": "tsc && vite build",
-    "tauri:build-release": "tauri build",
-    "build": "build:css-release && build:vite-release && tauri:build-release",
-    "build:css": "tailwindcss -i ./src/styles.css -o ./src/output.css --watch",
-    "build:vite": "tsc && vite build --watch",
-    "tauri:dev": "tauri dev",
-    "dev": "concurrently \"npm run build:vite\" \"npm run tauri:dev\" \"npm run build:css\""
+    "dev": "tauri dev",
+    "build": "tauri build"
   },
   "dependencies": {
     "@octokit/core": "^6.1.2",

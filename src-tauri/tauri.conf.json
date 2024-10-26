@@ -10,10 +10,11 @@
     "withGlobalTauri": true,
     "windows": [
       {
+        "transparent": true,
         "title": "snout-apps",
         "width": 500,
-        "height": 750,
-        "decorations": false,
+        "height": 500,
+        "decorations": true,
         "alwaysOnTop": true
       }
     ],
